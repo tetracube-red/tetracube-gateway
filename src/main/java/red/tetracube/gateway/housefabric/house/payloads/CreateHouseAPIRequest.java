@@ -13,8 +13,17 @@ public class CreateHouseAPIRequest {
     @JsonProperty("name")
     private String name;
 
+    @NotNull
+    @NotEmpty
+    @JsonProperty("maintenanceCode")
+    private String maintenanceCode;
+
     public String getName() {
         return name;
+    }
+
+    public String getMaintenanceCode() {
+        return maintenanceCode;
     }
 
     public CreateHouseRequest asProcedureRequest() {
