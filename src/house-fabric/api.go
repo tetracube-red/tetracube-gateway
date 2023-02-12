@@ -1,34 +1,39 @@
 package house_fabric
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"log"
-	"time"
+	"net/http"
+	"reflect"
+	"tetracube.red/gateway/src/core/api"
+	"tetracube.red/gateway/src/house-fabric/payloads"
 )
 
-type Person struct {
-	Name     string    `form:"name"`
-	Address  string    `form:"address"`
-	Birthday time.Time `form:"birthday" time_format:"2006-01-02" time_utc:"1"`
-}
 type HouseFabricAPI struct {
 	Engine *gin.Engine
 }
 
 func (houseFabricAPI *HouseFabricAPI) BuildHouseFabricEndpoints() {
-	houseFabricAPI.Engine.POST("/test", houseFabricAPI.createHouse)
+	houseFabricAPI.Engine.POST("/houses", houseFabricAPI.createHouse)
 }
 
 func (houseFabricAPI *HouseFabricAPI) createHouse(c *gin.Context) {
-	var person Person
-	// If `GET`, only `Form` binding engine (`query`) used.
-	// If `POST`, first checks the `content-type` for `JSON` or `XML`, then uses `Form` (`form-data`).
-	// See more at https://github.com/gin-gonic/gin/blob/master/binding/binding.go#L48
-	if c.ShouldBind(&person) == nil {
-		log.Println(person.Name)
-		log.Println(person.Address)
-		log.Println(person.Birthday)
+	var house payloads.HouseAPIRequest
+
+	if bindingError := c.ShouldBind(&house); bindingError != nil {
+		log.Println("Binding error", bindingError)
+		var validationErrors validator.ValidationErrors
+		if errors.As(bindingError, &validationErrors) {
+			bodyType := reflect.TypeOf(&house).Elem()
+			c.JSON(http.StatusBadRequest, gin.H{"errors": api.MapValidationError(validationErrors, bodyType)})
+			return
+		}
+		return
 	}
 
-	c.String(200, "Success")
+	log.Println("Going to create house with name ", house.Name)
+
+	c.String(201, "Success")
 }

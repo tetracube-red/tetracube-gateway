@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import red.tetracube.gateway.extensions.GRPCExceptionExtensions;
 import red.tetracube.gateway.housefabric.house.payloads.CreateHouseAPIReply;
-import red.tetracube.gateway.housefabric.house.payloads.CreateHouseAPIRequest;
 import red.tetracube.gateway.settings.properties.GatewayProperties;
 
 import javax.enterprise.context.RequestScoped;

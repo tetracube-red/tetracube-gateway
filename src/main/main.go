@@ -14,7 +14,6 @@ func main() {
 		log.Fatalln("Cannot initialize configurations")
 	}
 
-	log.Printf("Exposing APIs service on port %s\n", configuration.Port)
 	r := gin.New()
 	houseFabricAPI := housefabric.HouseFabricAPI{
 		Engine: r,

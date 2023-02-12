@@ -1,12 +1,9 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "red.tetracube.gateway.housefabric.house";
-option java_outer_classname = "HouseGrpcProto";
-
 package house;
+option go_package = "./src/house-fabric/houses";
 
-service HouseProcedure {
+service HouseProcedures {
   rpc Create (CreateHouseRequest) returns (CreateHouseReply) {}
 }
 
@@ -16,6 +13,6 @@ message CreateHouseRequest {
 
 message CreateHouseReply {
   string name = 1;
-  string id = 2;
+  bytes id = 2;
   string slug = 3;
 }
