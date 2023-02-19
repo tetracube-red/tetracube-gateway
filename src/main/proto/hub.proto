@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "errors.proto";
+
+option java_multiple_files = true;
+option java_package = "red.tetracube.tetrahub.hub";
+option java_outer_classname = "HubGrpcProto";
+
+package hub;
+
+service HubServices {
+  rpc Create (TetraHubHubCreateRequest) returns (TetraHubHubCreateReply) {}
+}
+
+message TetraHubHubCreateRequest {
+  string name = 1;
+}
+
+message TetraHubHubCreateReply {
+  string id = 1;
+  string name = 2;
+  string slug = 3;
+  errors.TetraHubProcessErrorReply processingError = 4;
+}
