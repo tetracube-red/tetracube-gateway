@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "errors.proto";
+
+option java_multiple_files = true;
+option java_package = "red.tetracube.gateway.guest";
+option java_outer_classname = "GuestGrpcProto";
+
+package guest;
+
+service GuestServices {
+  rpc Enrollment (HubLoungeGuestEnrollmentRequest) returns (HubLoungeGuestEnrollmentReply) {}
+  rpc Login (HubLoungeGuestLoginRequest) returns (HubLoungeGuestLoginReply) {}
+}
+
+message HubLoungeGuestEnrollmentRequest {
+  string name = 1;
+  string password = 2;
+  string guest_group_name = 3;
+}
+
+message HubLoungeGuestEnrollmentReply {
+  errors.HubLoungeProcessErrorReply processingError = 1;
+}
+
+message HubLoungeGuestLoginRequest {
+  string name = 1;
+  string password = 2;
+}
+
+message HubLoungeGuestLoginReply {
+  string accessToken = 1;
+  errors.HubLoungeProcessErrorReply processingError = 2;
+}
