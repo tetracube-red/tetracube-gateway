@@ -9,11 +9,9 @@ import red.tetracube.extensions.ExceptionMapper;
 import red.tetracube.gateway.guest.GuestServices;
 import red.tetracube.gateway.guest.HubLoungeGuestEnrollmentRequest;
 import red.tetracube.gateway.guest.HubLoungeGuestLoginRequest;
-import red.tetracube.gateway.hub.HubLoungeHubCreateRequest;
 import red.tetracube.guest.payloads.GuestEnrollmentAPIRequest;
 import red.tetracube.guest.payloads.GuestLoginAPIReply;
 import red.tetracube.guest.payloads.GuestLoginAPIRequest;
-import red.tetracube.hub.payloads.HubCreateAPIReply;
 import red.tetracube.properties.GatewayProperty;
 
 import javax.inject.Inject;
